@@ -9,6 +9,7 @@
         {% for driver in drivers %}
         <div class="driver">
             Name: {{ driver.name }}
+            <a href="/book/{{ driver.id }}">Book</a>
         </div>
         {% endfor %}
     </div>

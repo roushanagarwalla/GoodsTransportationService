@@ -5,5 +5,12 @@
 {% block body %}
 <div class="container mt-5">
     <h1>Homepage</h1>
+    <div class="mt-5">
+        {% for booking in bookings %}
+        <div class="booking">
+            Name: {{ booking.dealer.name }}
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock body %}

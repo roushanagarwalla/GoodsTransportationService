@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.db.models import Q
-from .models import Dealer, Driver
+from .models import Dealer, Driver, Book
 from django.contrib.auth import authenticate, login, logout
 
 def signup(request):
@@ -63,7 +63,6 @@ def signup_driver(request):
         driver = Driver(rel=user, name=name, mob=mob, age=age,driving_experience = exp , truck_no=truck_no, truck_capacity=capacity, transporter_name= tname,from_state1=from_state1, from_city1=from_city1, to_state1 = to_state1, to_city1=to_city1, from_state2=from_state2, from_city2=from_city2, to_state2 = to_state2, to_city2=to_city2, from_state3=from_state3, from_city3=from_city3, to_state3 = to_state3, to_city3=to_city3)
         driver.save()
         redirect("/login/driver")
-    
     return render(request, "signup/signup_driver.html")
 
 def login_user(request):
@@ -83,7 +82,8 @@ def login_driver(request):
     if request.method == "POST":
         email = request.POST.get("email");
         password = request.POST.get("pass");
-        user = authenticate(username=9678388634, password=password)
+        user = authenticate(username=1234567890, password="Roshan@1234")
+        print(user)
         if user is not None:
             login(request, user)
             return redirect("/driver")
@@ -102,5 +102,30 @@ def index_dealer(request):
     })
 
 def index_driver(request):
-    print(request.user)
-    return render(request, "index_driver.html")
+    user = request.user
+    driver = Driver.objects.filter(rel=user)
+    if driver.first():
+        bookings = Book.objects.filter(driver = driver.first())
+        print(bookings)
+    bookings = Book.objects.filter(driver=driver.first())
+    return render(request, "index_driver.html", context={
+        "bookings": bookings,
+    })
+
+def index(request):
+    if request.user is None:
+        return redirect("/login")
+    if request.user.first_name == "driver":
+        return redirect("/driver")
+    if request.user.first_name == "dealer":
+        return redirect("/dealer")
+    return render(request, "index.html")
+
+def book(request, id):
+    user = request.user
+    dealer = Dealer.objects.get(rel=user)
+    driver = Driver.objects.get(id = id)
+    booking = Book(dealer = dealer, driver = driver)
+    booking.save()
+    print("You have Booked ", driver)
+    return redirect("/")

@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-
 class Dealer(models.Model):
     rel = models.ForeignKey(User, on_delete=models.CASCADE);
     
@@ -47,3 +46,7 @@ class Driver(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Book(models.Model):
+    dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)

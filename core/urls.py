@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
+    path("", views.index),
     path('dealer/', views.index_dealer, name="index_dealer"),
     path('driver/', views.index_driver, name="index_driver"),
     path('signup/', views.signup, name="signup"),
@@ -11,4 +12,5 @@ urlpatterns = [
     path('login/driver', views.login_driver, name="login_driver"),
     path('login/dealer', views.login_dealer, name="login_dealer"),
     path('logout/', views.logout, name="logout"),
+    path('book/<int:id>', views.book, name="book")
 ]
