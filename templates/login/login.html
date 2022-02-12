@@ -5,8 +5,12 @@
 {% block body %}
 
 <div class="container mt-5">
-    <a href="/login/driver" class="btn btn-primary">Driver</a>
-    <a href="/login/dealer" class="btn btn-primary">Dealer</a>
+    <h2 class="text-primary text-center">Login As</h2>
+    <div class="d-flex justify-content-center mt-4">
+        <a href="/login/driver" class="custom_btn_login btn btn-info text-light">Driver</a>
+        <a href="/login/dealer" class="custom_btn_login btn btn-info text-light">Dealer</a>
+    </div>
+    <p class="text-center">Haven't yet Registered, <a href="/signup">Register here</a>
 </div>
 
 {% endblock body %}

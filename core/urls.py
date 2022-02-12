@@ -11,6 +11,6 @@ urlpatterns = [
     path('login/', views.login_user, name="login_user"),
     path('login/driver', views.login_driver, name="login_driver"),
     path('login/dealer', views.login_dealer, name="login_dealer"),
-    path('logout/', views.logout, name="logout"),
+    path('logout/', views.handle_logout, name="logout"),
     path('book/<int:id>', views.book, name="book")
 ]

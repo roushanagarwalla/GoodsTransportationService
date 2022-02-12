@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from .models import Dealer, Driver, Book
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     return render(request, "signup/signup.html")
@@ -89,9 +90,12 @@ def login_driver(request):
             return redirect("/driver")
     return render(request, "login/login_driver.html")
 
-def logout(request):
+@login_required
+def handle_logout(request):
+    logout(request=request)
     return redirect("/login")
 
+@login_required
 def index_dealer(request):
     print(request.user)
     dealer = Dealer.objects.filter(rel = request.user).first()
@@ -99,8 +103,10 @@ def index_dealer(request):
     print(drivers)
     return render(request, "index_dealer.html", context={
         "drivers": drivers,
+        "dealer": dealer,
     })
 
+@login_required
 def index_driver(request):
     user = request.user
     driver = Driver.objects.filter(rel=user)
@@ -110,8 +116,10 @@ def index_driver(request):
     bookings = Book.objects.filter(driver=driver.first())
     return render(request, "index_driver.html", context={
         "bookings": bookings,
+        "driver": driver.first(),
     })
 
+@login_required
 def index(request):
     if request.user is None:
         return redirect("/login")
@@ -121,6 +129,7 @@ def index(request):
         return redirect("/dealer")
     return render(request, "index.html")
 
+@login_required
 def book(request, id):
     user = request.user
     dealer = Dealer.objects.get(rel=user)

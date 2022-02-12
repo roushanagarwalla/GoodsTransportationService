@@ -3,15 +3,39 @@
 {% block title %}Home{% endblock title %}
 
 {% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">GoodsTransportService</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="d-flex" style="margin-left: auto">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <a href="/logout" class="mx-2 btn btn-danger" type="submit">Logout</a>
+      </div>
+    </div>
+</nav>
 <div class="container mt-5">
-    <h1>Homepage</h1>
-    <div class="mt-5">
-        {% for driver in drivers %}
-        <div class="driver">
-            Name: {{ driver.name }}
-            <a href="/book/{{ driver.id }}">Book</a>
-        </div>
+    <h2 class="my-5 text-center">All the interested Drivers(<span class="text-primary">{{ dealer.from_city }} - {{ dealer.to_city }}</span>)</h2>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-7">
+            {% for driver in drivers %}
+            <div class="card mb-4">
+                <h5 class="card-header">Truck Number: {{ driver.truck_no }}</h5>
+                <div class="card-body">
+                  <p class="card-text">Name: {{ driver.name }}</p>
+                  <p class="card-text">Age: {{ driver.age }} years old</p>
+                  <p class="card-text">Experience: {{ driver.driving_experience }} years</p>
+                  <p class="card-text">Mobile Number: {{ driver.mob }}</p>
+                  <a href="/book/{{ driver.id }}" class="btn btn-primary">Book Drivers</a>
+                  <a href="/details/{{ driver.id }}" class="btn btn-primary">More Details ></a>
+                </div>
+            </div>
         {% endfor %}
+    </div>
     </div>
 </div>
 {% endblock body %}

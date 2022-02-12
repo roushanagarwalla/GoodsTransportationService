@@ -3,14 +3,33 @@
 {% block title %}Home{% endblock title %}
 
 {% block body %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">GoodsTransportService</a>
+        <a href="/logout" class="btn btn-danger" type="submit">Logout</a>
+    </div>
+  </nav>
 <div class="container mt-5">
-    <h1>Homepage</h1>
-    <div class="mt-5">
-        {% for booking in bookings %}
-        <div class="booking">
-            Name: {{ booking.dealer.name }}
+    <h2 class="text-center text-primary">All Your Bookings</h2>
+    <div class="mx-auto d-flex">
+        <a href="" class="mx-auto text-center btn btn-info text-light">Update Your Data</a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="mt-4 col-md-7">
+            {% for booking in bookings %}
+            <div class="card mb-4 mt-3">
+                <h5 class="card-header"></h5>
+                <div class="card-body">
+                    <p class="card-text">Name: {{ booking.dealer.name }}</p>
+                    <p class="card-text">Mobile Number: {{ booking.dealer.mob }}</p>
+                    <p class="card-text">Source: {{ booking.dealer.from_city }}</p>
+                    <p class="card-text">Destination: {{ booking.dealer.to_city }}</p>
+                    <a href="/details/{{ booking.dealer.id }}" class="btn btn-primary">More Details ></a>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
+<br><br><br>
 {% endblock body %}
