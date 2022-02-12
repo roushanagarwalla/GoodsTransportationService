@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Dealer Login{% endblock title %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <h1 class="text-center text-primary">Dealer's Login</h1>
+    <div class="row justify-content-center">
+        <form method="post" action='/login/dealer' class="col-md-6 mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="email" class="form-label">Enter Your Email Address</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="pass" class="form-label">Enter Password</label>
+                <input type="password" class="form-control" id="pass" name="pass">
+            </div>
+            <button type="submit" class="d-block mx-auto btn btn-primary mt-4">Submit</button>
+        </form>
+    </div>
+</div>
+<br><br><br><br><br><br>
+
+{% endblock body %}

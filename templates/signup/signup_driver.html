@@ -4,13 +4,189 @@
 
 {% block body %}
 
-<div class="container mt-5">
-    <h1 class="text-center text-primary">SignUp</h1>
-    <div class="signup_form">
-        <form action="POST">
+<div class="container mt-4">
+    <h1 class="text-center text-primary">Driver's Signup</h1>
+    <div class="row justify-content-center">
+        <form method="post" action='/signup/driver' class="col-md-6 mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Enter Your Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Enter Your Email Address</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="mob" class="form-label">Enter the Mobile Number</label>
+                <input type="tel" class="form-control" id="mob" name="mob">
+            </div>
+            <div class="mb-3">
+                <label for="pass1" class="form-label">Enter Password</label>
+                <input type="password" class="form-control" id="pass1" name="pass1">
+            </div>
+            <div class="mb-3">
+                <label for="pass2" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="pass2" name="pass2">
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="age" class="form-label">Enter Yout Age</label>
+                    <input type="number" class="form-control" id="age" name="age">
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="exp" class="form-label">Enter Your Driving Experience</label>
+                    <input type="number" class="form-control" id="exp" name="exp">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="tname" class="form-label">Enter the Transporter Name</label>
+                <input type="text" class="form-control" id="tname" name="tname">
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="truck_no" class="form-label">Enter the Truck Number</label>
+                    <input type="text" class="form-control" id="truck_no" name="truck_no">
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="capacity" class="form-label">Enter the Truck Capacity</label>
+                    <input type="number" class="form-control" id="capacity" name="capacity">
+                </div>
+            </div>
 
+
+            <h6 class="text-center text-primary my-3">Enter Your First Preference</h6>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="from_state1" class="form-label">From State</label>
+                    <select class="form-select" id="from_state1" name="from_state1">
+                        <option selected>select State</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="from_city1" class="form-label">From City</label>
+                    <select class="form-select" id="from_city1" name="from_city1">
+                        <option selected>select City</option>
+                        <option value="Dibrugarh">Dibrugarh</option>
+                        <option value="Jorhat">Jorhat</option>
+                        <option value="Bangalore">Bangalore</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="mb-3 col-md-6">
+                    <label for="to_state1" class="form-label">To State</label>
+                    <select class="form-select" id="to_state1" name="to_state1">
+                        <option selected>select State</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="to_city1" class="form-label">To City</label>
+                    <select class="form-select" id="to_city1" name="to_city1">
+                        <option selected>select City</option>
+                        <option value="Dibrugarh">Dibrugarh</option>
+                        <option value="Jorhat">Jorhat</option>
+                        <option value="Bangalore">Bangalore</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <h6 class="text-center text-primary my-3">Enter Your Second Preference</h6>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="from_state2" class="form-label">From State</label>
+                    <select class="form-select" id="from_state2" name="from_state2">
+                        <option selected>select State</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="from_city2" class="form-label">From City</label>
+                    <select class="form-select" id="from_city2" name="from_city2">
+                        <option selected>select City</option>
+                        <option value="Dibrugarh">Dibrugarh</option>
+                        <option value="Jorhat">Jorhat</option>
+                        <option value="Bangalore">Bangalore</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="mb-3 col-md-6">
+                    <label for="to_state2" class="form-label">To State</label>
+                    <select class="form-select" id="to_state2" name="to_state2">
+                        <option selected>select State</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="to_city2" class="form-label">To City</label>
+                    <select class="form-select" id="to_city2" name="to_city2">
+                        <option selected>select City</option>
+                        <option value="Dibrugarh">Dibrugarh</option>
+                        <option value="Jorhat">Jorhat</option>
+                        <option value="Bangalore">Bangalore</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+            <h6 class="text-center text-primary my-3">Enter Your Third Preference</h6>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="from_state3" class="form-label">From State</label>
+                    <select class="form-select" id="from_state3" name="from_state3">
+                        <option selected>select State</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="from_city3" class="form-label">From City</label>
+                    <select class="form-select" id="from_city3" name="from_city3">
+                        <option selected>select City</option>
+                        <option value="Dibrugarh">Dibrugarh</option>
+                        <option value="Jorhat">Jorhat</option>
+                        <option value="Bangalore">Bangalore</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="mb-3 col-md-6">
+                    <label for="to_state3" class="form-label">To State</label>
+                    <select class="form-select" id="to_state3" name="to_state3">
+                        <option selected>select State</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="to_city3" class="form-label">To City</label>
+                    <select class="form-select" id="to_city3" name="to_city3">
+                        <option selected>select City</option>
+                        <option value="Dibrugarh">Dibrugarh</option>
+                        <option value="Jorhat">Jorhat</option>
+                        <option value="Bangalore">Bangalore</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="d-block mx-auto btn btn-primary mt-4">Submit</button>
         </form>
     </div>
 </div>
+<br><br><br><br><br><br>
 
 {% endblock body %}
