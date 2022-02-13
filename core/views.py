@@ -5,6 +5,9 @@ from .models import Dealer, Driver, Book
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import math, random
+from django.conf import settings
+from django.core.mail import send_mail
 
 def signup(request):
     return render(request, "signup/signup.html")
@@ -226,19 +229,85 @@ def driver_details(request, id):
         messages.error(request, "You are not allowed to see other driver's Details")
         return redirect("/")
     else:
-        driver = Driver.objects.get(id = id)
-        if driver is None:
+        driver = Driver.objects.filter(id = id)
+        if driver.count() == 0:
             messages.error(request, "Driver Not Found")
             return redirect("/")
-        return render(request, "driver_details.html", context = {"driver": driver})
+        return render(request, "driver_details.html", context = {"driver": driver.first()})
 
 @login_required
 def dealer_details(request, id):
     if request.user.first_name == "dealer":
         messages.error(request, "You are not allowed to see other dealer's Details")
         return redirect("/")
-    dealer = Dealer.objects.get(id = id)
-    if dealer is None:
+    dealer = Dealer.objects.filter(id = id)
+    if dealer.count() == 0:
         messages.error(request,"Dealer Not Found")
         return redirect("/")
-    return render(request, "dealer_details.html", context = {"dealer": dealer})
+    return render(request, "dealer_details.html", context = {"dealer": dealer.first()})
+
+def generate_otp():
+    digits = "0123456789"
+    otp = ""
+    for i in range(6):
+        otp = otp + digits[math.floor(random.random() * 10)]
+    return otp
+
+def send_otp(request):
+    email = request.session['otp_mail'] 
+    otp = request.session['otp'] 
+    subject = 'OTP for GoodsTransprotService'
+    message = f'Hi, Your OTP is {otp}'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ["roshanagarwal67@gmail.com", ]
+    send_mail( subject, message, email_from, recipient_list )
+    messages.info(request, "The OTP has been send")
+
+def login_otp(request):
+    return render(request, "login/login_otp.html")
+
+def login_driver_otp(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        request.session['otp_mail'] = email
+        request.session['otp'] = generate_otp()
+        user = User.objects.filter(email = email)
+        if user.count() == 0:
+            messages.error(request, "The user does not exists, Please Register first before login")
+            return redirect("/signup")
+        if not user.first().first_name == "driver":
+            messages.error(request, "You are not registered as a Driver")
+            return redirect("/login") 
+        send_otp(request)
+        return redirect("/verify_otp")
+    return render(request, "login/login_driver_otp.html")
+
+def login_dealer_otp(request):
+    if request.method == "POST":
+       email = request.POST.get("email")
+       request.session['otp_mail'] = email
+       request.session['otp'] = generate_otp()
+       user = User.objects.filter(email = email)
+       if user.count() == 0:
+           messages.error(request, "The user does not exists, Please Register first before login")
+           return redirect("/signup")
+       if not user.first().first_name == "dealer":
+           messages.error(request, "You are not registered as a Dealer")
+           return redirect("/login") 
+       send_otp(request)
+       return redirect("/verify_otp")
+    return render(request, "login/login_dealer_otp.html")
+
+def verify_otp(request):
+    if request.method == "POST":
+        otp = request.POST.get("otp")
+        if(otp == request.session['otp']):
+            user = User.objects.filter(email=request.session['otp_mail'])
+            if user.count() == 0:
+                messages.error(request,"The user does not exists")
+                return redirect("/login")
+            login(request, user.first())
+            return redirect("/")
+        else:
+            messages.error(request,"Please enter the correct OTP")
+    return render(request, "login/verify_otp.html")

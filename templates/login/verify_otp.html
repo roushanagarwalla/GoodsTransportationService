@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Driver Login{% endblock title %}
+
+{% block body %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary">OTP Verification</h2>
+    <p class="text-center">Haven't yet Registered, <a href="/signup">Register here</a>
+    <div class="row justify-content-center">
+        <form method="post" action='/verify_otp' class="col-md-4 mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="otp" class="form-label">Enter the OTP</label>
+                <input type="otp" class="form-control" id="otp" name="otp" required autofocus>
+            </div>
+            <button type="submit" class="d-block mx-auto btn btn-primary mt-4">Submit</button>
+        </form>
+    </div>
+</div>
+<br><br><br><br><br><br>
+
+{% endblock body %}
