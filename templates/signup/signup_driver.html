@@ -4,7 +4,14 @@
 {% block title %}Driver SignUp{% endblock title %}
 
 {% block body %}
-
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
 <div class="container mt-4">
     <h1 class="text-center text-primary">Register as a Driver</h1>
     <p class="text-center">Already have an account, <a href="/login">SignIn here</a>
@@ -12,47 +19,47 @@
         <form method="post" action='/signup/driver' class="col-md-6 mt-4">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="name" class="form-label">Enter Your Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <label for="name" class="form-label">Enter Your Name*</label>
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Enter Your Email Address</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <label for="email" class="form-label">Enter Your Email Address*</label>
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3">
-                <label for="mob" class="form-label">Enter the Mobile Number</label>
-                <input type="tel" class="form-control" id="mob" name="mob">
+                <label for="mob" class="form-label">Enter the Mobile Number*</label>
+                <input type="tel" class="form-control" id="mob" name="mob" required>
             </div>
             <div class="mb-3">
-                <label for="pass1" class="form-label">Enter Password</label>
-                <input type="password" class="form-control" id="pass1" name="pass1">
+                <label for="pass1" class="form-label">Enter Password*</label>
+                <input type="password" class="form-control" id="pass1" name="pass1" required>
             </div>
             <div class="mb-3">
-                <label for="pass2" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="pass2" name="pass2">
+                <label for="pass2" class="form-label">Confirm Password*</label>
+                <input type="password" class="form-control" id="pass2" name="pass2" required>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <label for="age" class="form-label">Enter Yout Age</label>
-                    <input type="number" class="form-control" id="age" name="age">
+                    <label for="age" class="form-label">Enter Yout Age*</label>
+                    <input type="number" class="form-control" id="age" name="age" required>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="exp" class="form-label">Enter Your Driving Experience</label>
-                    <input type="number" class="form-control" id="exp" name="exp">
+                    <label for="exp" class="form-label">Enter Your Driving Experience*</label>
+                    <input type="number" class="form-control" id="exp" name="exp" required>
                 </div>
             </div>
             <div class="mb-3">
-                <label for="tname" class="form-label">Enter the Transporter Name</label>
-                <input type="text" class="form-control" id="tname" name="tname">
+                <label for="tname" class="form-label">Enter the Transporter Name*</label>
+                <input type="text" class="form-control" id="tname" name="tname" required>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <label for="truck_no" class="form-label">Enter the Truck Number</label>
-                    <input type="text" class="form-control" id="truck_no" name="truck_no">
+                    <label for="truck_no" class="form-label">Enter the Truck Number*</label>
+                    <input type="text" class="form-control" id="truck_no" name="truck_no" required>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="capacity" class="form-label">Enter the Truck Capacity</label>
-                    <input type="number" class="form-control" id="capacity" name="capacity">
+                    <label for="capacity" class="form-label">Enter the Truck Capacity*</label>
+                    <input type="number" class="form-control" id="capacity" name="capacity" required>
                 </div>
             </div>
 
@@ -60,22 +67,22 @@
             <h6 class="text-center text-primary my-3">Enter Your First Interested Route</h6>
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <label for="from_state1" class="form-label">From State</label>
-                    <select class="form-select" id="from_state1" name="from_state1"></select>
+                    <label for="from_state1" class="form-label">From State*</label>
+                    <select class="form-select" id="from_state1" name="from_state1" required></select>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="from_city1" class="form-label">From City</label>
-                    <select class="form-select" id="from_city1" name="from_city1"></select>
+                    <label for="from_city1" class="form-label">From City*</label>
+                    <select class="form-select" id="from_city1" name="from_city1" required></select>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="mb-3 col-md-6">
-                    <label for="to_state1" class="form-label">To State</label>
-                    <select class="form-select" id="to_state1" name="to_state1"></select>
+                    <label for="to_state1" class="form-label">To State*</label>
+                    <select class="form-select" id="to_state1" name="to_state1" required></select>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="to_city1" class="form-label">To City</label>
-                    <select class="form-select" id="to_city1" name="to_city1"></select>
+                    <label for="to_city1" class="form-label">To City*</label>
+                    <select class="form-select" id="to_city1" name="to_city1" required></select>
                 </div>
             </div>
 
@@ -83,22 +90,22 @@
             <h6 class="text-center text-primary my-3">Enter Your Second Interested Route</h6>
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <label for="from_state2" class="form-label">From State</label>
-                    <select class="form-select" id="from_state2" name="from_state2"></select>
+                    <label for="from_state2" class="form-label">From State*</label>
+                    <select class="form-select" id="from_state2" name="from_state2" required></select>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="from_city2" class="form-label">From City</label>
-                    <select class="form-select" id="from_city2" name="from_city2"></select>
+                    <label for="from_city2" class="form-label">From City*</label>
+                    <select class="form-select" id="from_city2" name="from_city2" required></select>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="mb-3 col-md-6">
-                    <label for="to_state2" class="form-label">To State</label>
-                    <select class="form-select" id="to_state2" name="to_state2"></select>
+                    <label for="to_state2" class="form-label">To State*</label>
+                    <select class="form-select" id="to_state2" name="to_state2" required></select>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="to_city2" class="form-label">To City</label>
-                    <select class="form-select" id="to_city2" name="to_city2"></select>
+                    <label for="to_city2" class="form-label">To City*</label>
+                    <select class="form-select" id="to_city2" name="to_city2" required></select>
                 </div>
             </div>
 
@@ -107,22 +114,22 @@
             <h6 class="text-center text-primary my-3">Enter Your Third Interested Route</h6>
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <label for="from_state3" class="form-label">From State</label>
-                    <select class="form-select" id="from_state3" name="from_state3"></select>
+                    <label for="from_state3" class="form-label">From State*</label>
+                    <select class="form-select" id="from_state3" name="from_state3" required></select>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="from_city3" class="form-label">From City</label>
-                    <select class="form-select" id="from_city3" name="from_city3"></select>
+                    <label for="from_city3" class="form-label">From City*</label>
+                    <select class="form-select" id="from_city3" name="from_city3" required></select>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="mb-3 col-md-6">
-                    <label for="to_state3" class="form-label">To State</label>
-                    <select class="form-select" id="to_state3" name="to_state3"></select>
+                    <label for="to_state3" class="form-label">To State*</label>
+                    <select class="form-select" id="to_state3" name="to_state3" required></select>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="to_city3" class="form-label">To City</label>
-                    <select class="form-select" id="to_city3" name="to_city3"></select>
+                    <label for="to_city3" class="form-label">To City*</label>
+                    <select class="form-select" id="to_city3" name="to_city3" required></select>
                 </div>
             </div>
             <button type="submit" class="d-block mx-auto btn btn-primary mt-4">Submit</button>

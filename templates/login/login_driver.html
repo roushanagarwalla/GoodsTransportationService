@@ -3,7 +3,14 @@
 {% block title %}Driver Login{% endblock title %}
 
 {% block body %}
-
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
 <div class="container mt-5">
     <h2 class="text-center text-primary">Driver's Login</h2>
     <p class="text-center">Haven't yet Registered, <a href="/signup">Register here</a>
@@ -12,11 +19,11 @@
             {% csrf_token %}
             <div class="mb-3">
                 <label for="email" class="form-label">Enter Your Email Address</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3">
                 <label for="pass" class="form-label">Enter Password</label>
-                <input type="password" class="form-control" id="pass" name="pass">
+                <input type="password" class="form-control" id="pass" name="pass" required>
             </div>
             <button type="submit" class="d-block mx-auto btn btn-primary mt-4">Submit</button>
         </form>

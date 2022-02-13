@@ -17,23 +17,35 @@
       </div>
     </div>
 </nav>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
 <div class="container mt-5">
     <h2 class="my-5 text-center">All the interested Drivers(<span class="text-primary">{{ dealer.from_city }} - {{ dealer.to_city }}</span>)</h2>
     <div class="row mt-5 justify-content-center">
         <div class="col-md-7">
+            {% if drivers is not None %}
             {% for driver in drivers %}
             <div class="card mb-4">
-                <h5 class="card-header">Truck Number: {{ driver.truck_no }}</h5>
-                <div class="card-body">
-                  <p class="card-text">Name: {{ driver.name }}</p>
-                  <p class="card-text">Age: {{ driver.age }} years old</p>
-                  <p class="card-text">Experience: {{ driver.driving_experience }} years</p>
-                  <p class="card-text">Mobile Number: {{ driver.mob }}</p>
-                  <a href="/book/{{ driver.id }}" class="btn btn-primary">Book Drivers</a>
-                  <a href="/details/driver/{{ driver.id }}" class="btn btn-primary">More Details ></a>
-                </div>
+              <h5 class="card-header">Truck Number: {{ driver.truck_no }}</h5>
+              <div class="card-body">
+                <p class="card-text">Name: {{ driver.name }}</p>
+                <p class="card-text">Age: {{ driver.age }} years old</p>
+                <p class="card-text">Experience: {{ driver.driving_experience }} years</p>
+                <p class="card-text">Mobile Number: {{ driver.mob }}</p>
+                <a href="/book/{{ driver.id }}" class="btn btn-primary">Book Drivers</a>
+                <a href="/details/driver/{{ driver.id }}" class="btn btn-primary">More Details ></a>
+              </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+            {% else %}
+            <p class="text-danger text-center mt-4">No Drivers are available for the given Route</p>
+            {% endif %}
     </div>
     </div>
 </div>

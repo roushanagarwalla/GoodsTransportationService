@@ -8,6 +8,7 @@ class Dealer(models.Model):
     name = models.CharField(max_length=100)
     mob = models.CharField(max_length=20)
     nature = models.CharField(max_length=50)
+    quantity = models.IntegerField()
     weight = models.IntegerField()
     
     from_state = models.CharField(max_length=100)
