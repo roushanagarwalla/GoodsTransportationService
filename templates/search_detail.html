@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Home{% endblock title %}
 
 {% block body %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,24 +17,34 @@
       </div>
     </div>
 </nav>
-<div class="container mt-5">
-    <h2 class="my-5 text-center">All the interested Drivers(<span class="text-primary">{{ dealer.from_city }} - {{ dealer.to_city }}</span>)</h2>
-    <div class="row mt-5 justify-content-center">
+<div class="container">
+    <div class="row justify-content-center">
+        <h2 class="text-primary text-center my-5">Search Results</h2>
         <div class="col-md-7">
+            {% if drivers is not None %}
             {% for driver in drivers %}
             <div class="card mb-4">
                 <h5 class="card-header">Truck Number: {{ driver.truck_no }}</h5>
                 <div class="card-body">
-                  <p class="card-text">Name: {{ driver.name }}</p>
-                  <p class="card-text">Age: {{ driver.age }} years old</p>
-                  <p class="card-text">Experience: {{ driver.driving_experience }} years</p>
-                  <p class="card-text">Mobile Number: {{ driver.mob }}</p>
-                  <a href="/book/{{ driver.id }}" class="btn btn-primary">Book Drivers</a>
-                  <a href="/details/driver/{{ driver.id }}" class="btn btn-primary">More Details ></a>
+                    <p class="card-text">Name: {{ driver.name }}</p>
+                    <p class="card-text">Age: {{ driver.age }} years old</p>
+                    <p class="card-text">Experience: {{ driver.driving_experience }} years</p>
+                    <p class="card-text">Mobile Number: {{ driver.mob }}</p>
+                    <a href="/book/{{ driver.id }}" class="btn btn-primary">Book Drivers</a>
+                    <a href="/details/{{ driver.id }}" class="btn btn-primary">More Details ></a>
                 </div>
             </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-center text-danger">No results Found</p>
+            {% endif %}
+        </div>
+            
     </div>
 </div>
+
 {% endblock body %}
+
+{% block script %}
+    <script src="{% static 'js/signup_dealer.js' %}"></script>
+{% endblock script %}

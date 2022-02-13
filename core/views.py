@@ -56,14 +56,21 @@ def signup_driver(request):
         from_city3 = request.POST.get("from_city3")        
         to_state3 = request.POST.get("to_state3")        
         to_city3 = request.POST.get("to_city3") 
-
-        user = User.objects.create_user(email, email, pass1)
-        user.first_name = "driver"
-        user.save()
         
-        driver = Driver(rel=user, name=name, mob=mob, age=age,driving_experience = exp , truck_no=truck_no, truck_capacity=capacity, transporter_name= tname,from_state1=from_state1, from_city1=from_city1, to_state1 = to_state1, to_city1=to_city1, from_state2=from_state2, from_city2=from_city2, to_state2 = to_state2, to_city2=to_city2, from_state3=from_state3, from_city3=from_city3, to_state3 = to_state3, to_city3=to_city3)
-        driver.save()
-        redirect("/login/driver")
+        print(from_state1)
+        print(from_state2)
+        print(from_state3)
+        print(to_state1)
+        print(to_state2)
+        print(to_state3)
+
+        # user = User.objects.create_user(email, email, pass1)
+        # user.first_name = "driver"
+        # user.save()
+        
+        # driver = Driver(rel=user, name=name, mob=mob, age=age,driving_experience = exp , truck_no=truck_no, truck_capacity=capacity, transporter_name= tname,from_state1=from_state1, from_city1=from_city1, to_state1 = to_state1, to_city1=to_city1, from_state2=from_state2, from_city2=from_city2, to_state2 = to_state2, to_city2=to_city2, from_state3=from_state3, from_city3=from_city3, to_state3 = to_state3, to_city3=to_city3)
+        # driver.save()
+        # redirect("/login/driver")
     return render(request, "signup/signup_driver.html")
 
 def login_user(request):
@@ -99,7 +106,7 @@ def handle_logout(request):
 def index_dealer(request):
     print(request.user)
     dealer = Dealer.objects.filter(rel = request.user).first()
-    drivers = Driver.objects.filter(Q(from_city1=dealer.from_city, to_city1=dealer.to_city) | Q(from_city2=dealer.from_city, to_city2=dealer.to_city) | Q(from_city2=dealer.from_city, to_city2=dealer.to_city))
+    drivers = Driver.objects.filter(Q(from_city1=dealer.from_city, to_city1=dealer.to_city) | Q(from_city2=dealer.from_city, to_city2=dealer.to_city) | Q(from_city3=dealer.from_city, to_city3=dealer.to_city))
     print(drivers)
     return render(request, "index_dealer.html", context={
         "drivers": drivers,
@@ -138,3 +145,29 @@ def book(request, id):
     booking.save()
     print("You have Booked ", driver)
     return redirect("/")
+
+@login_required
+def search(request):
+    if request.method == "POST":       
+        from_state = request.POST.get("from_state")        
+        from_city = request.POST.get("from_city")        
+        to_state = request.POST.get("to_state")        
+        to_city = request.POST.get("to_city")
+        drivers = Driver.objects.filter(Q(from_city1=from_city, to_city1=to_city) | Q(from_city2=from_city, to_city2=to_city) | Q(from_city3=from_city, to_city3=to_city))
+        print(drivers)
+        if drivers.count() <=0:
+            drivers=None
+        return render(request, "search_detail.html", context={"drivers": drivers})
+    return render(request, "search.html")
+
+def driver_details(request, id):
+    driver = Driver.objects.filter(id = id)
+    if driver is not None:
+        driver = driver.first()
+    return render(request, "driver_details.html", context = {"driver": driver})
+
+def dealer_details(request, id):
+    dealer = Dealer.objects.filter(id = id)
+    if dealer is not None:
+        dealer = dealer.first()
+    return render(request, "dealer_details.html", context = {"dealer": dealer})

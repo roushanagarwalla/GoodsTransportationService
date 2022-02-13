@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Driver Details{% endblock title %}
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="/">GoodsTransportService</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex" style="margin-left: auto">
+        <a href="/search" class="btn btn-success">Search</a>
+        </div>
+        <a href="/logout" class="mx-2 btn btn-danger" type="submit">Logout</a>
+    </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% if driver is None %}
+            <h2 class="text-danger text-center">The Driver does not exists</h2>
+            {% else %}
+            <h2 class="text-primary text-center">Details of {{ driver.name }}</h2>
+            <div class="mt-5">
+                <p><strong>Name: </strong>{{ driver.name }}</p>
+                <p><strong>Age: </strong>{{ driver.age }} years old</p>
+                <p><strong>Mobile Number: </strong>{{ driver.mob }}</p>
+                <p><strong>Truck Number: </strong>{{ driver.truck_no }}</p>
+                <p><strong>Truck Capacity: </strong>{{ driver.truck_capacity }} Kg</p>
+                <p><strong>Transporter Name: </strong>{{ driver.transporter_name }}</p>
+                <p><strong>Driving Experience: </strong>{{ driver.driving_experience }} Years</p>
+                <p><strong>Interested Route1: </strong>{{ driver.from_city1 }}({{ driver.from_state1 }}) to {{ driver.to_city1 }}({{ driver.to_state1 }})</p>
+                <p><strong>Interested Route2: </strong>{{ driver.from_city2 }}({{ driver.from_state2 }}) to {{ driver.to_city2 }}({{ driver.to_state2 }})</p>
+                <p><strong>Interested Route3: </strong>{{ driver.from_city3 }}({{ driver.from_state3 }}) to {{ driver.to_city3 }}({{ driver.to_state3 }})</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

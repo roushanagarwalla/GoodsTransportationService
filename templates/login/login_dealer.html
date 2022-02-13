@@ -4,10 +4,11 @@
 
 {% block body %}
 
-<div class="container mt-4">
-    <h1 class="text-center text-primary">Dealer's Login</h1>
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Dealer's Login</h2>
+    <p class="text-center">Haven't yet Registered, <a href="/signup">Register here</a>
     <div class="row justify-content-center">
-        <form method="post" action='/login/dealer' class="col-md-6 mt-4">
+        <form method="post" action='/login/dealer' class="col-md-4 mt-4">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="email" class="form-label">Enter Your Email Address</label>
