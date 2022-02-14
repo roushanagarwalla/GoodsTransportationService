@@ -259,7 +259,7 @@ def send_otp(request):
     subject = 'OTP for GoodsTransprotService'
     message = f'Hi, Your OTP is {otp}'
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ["roshanagarwal67@gmail.com", email]
+    recipient_list = [email, ]
     send_mail( subject, message, email_from, recipient_list )
     messages.info(request, "The OTP has been send")
 
