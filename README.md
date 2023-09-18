@@ -1,7 +1,7 @@
 # **GoodsTransportationService**
 GoodsTransportationService - A web Application where dealers can book drivers for transporting their Goods, developed for Hackathon.
 
-<strong>Frameworks/Languages Used : </strong> HTML, CSS, Django(Python), Bootstrap, SQLite Database.
+<strong>Frameworks/Languages Used : </strong> HTML, CSS, Django(Python), Bootstrap, MySQL Database.
 
 ## **How to Run**
 
